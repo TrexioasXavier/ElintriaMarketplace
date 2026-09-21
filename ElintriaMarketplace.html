@@ -1,0 +1,1132 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DarkForge Marketplace</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b0d10;
+    color: #e8eaf0;
+}
+
+/* HEADER */
+
+header {
+    height: 70px;
+    background: #111419;
+    border-bottom: 1px solid #252932;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 30px;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    margin-right: 40px;
+}
+
+.logo span {
+    color: #6c8cff;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #aeb4c0;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover,
+nav a.active {
+    color: white;
+}
+
+nav a.active {
+    color: #8195ff;
+}
+
+.header-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search {
+    background: #191d24;
+    border: 1px solid #292e38;
+    border-radius: 8px;
+
+    padding: 10px 14px;
+    width: 240px;
+
+    color: white;
+    outline: none;
+}
+
+.login-button,
+.upload-button {
+    padding: 10px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.login-button {
+    background: transparent;
+    border: 1px solid #343945;
+    color: #dce0e8;
+}
+
+.upload-button {
+    background: #596fd6;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* HERO */
+
+.hero {
+    padding: 70px 50px;
+
+    background:
+        radial-gradient(
+            circle at 70% 40%,
+            rgba(75, 95, 180, 0.18),
+            transparent 40%
+        );
+
+    border-bottom: 1px solid #20242c;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.hero h1 {
+    font-size: 46px;
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    color: #7086ed;
+}
+
+.hero p {
+    color: #9299a7;
+    max-width: 650px;
+    line-height: 1.6;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.hero-search {
+    display: flex;
+    max-width: 650px;
+}
+
+.hero-search input {
+    flex: 1;
+
+    background: #15181e;
+    border: 1px solid #303540;
+
+    border-radius: 8px 0 0 8px;
+
+    padding: 15px;
+
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+.hero-search button {
+    background: #596fd6;
+    border: none;
+
+    padding: 0 25px;
+
+    color: white;
+    font-weight: bold;
+
+    border-radius: 0 8px 8px 0;
+
+    cursor: pointer;
+}
+
+/* MAIN */
+
+.main {
+    max-width: 1250px;
+
+    margin: auto;
+    padding: 40px 25px;
+
+    display: flex;
+    gap: 35px;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 210px;
+    flex-shrink: 0;
+}
+
+.sidebar h3 {
+    font-size: 14px;
+    color: #8e95a3;
+
+    margin-bottom: 15px;
+
+    text-transform: uppercase;
+}
+
+.category {
+    padding: 10px 12px;
+
+    border-radius: 6px;
+
+    color: #aeb4c0;
+
+    cursor: pointer;
+
+    margin-bottom: 3px;
+
+    font-size: 14px;
+}
+
+.category:hover {
+    background: #171b21;
+    color: white;
+}
+
+.category.active {
+    background: #202637;
+    color: #8195ff;
+}
+
+.filter-section {
+    border-top: 1px solid #252932;
+
+    margin-top: 25px;
+    padding-top: 20px;
+}
+
+.filter-section label {
+    display: block;
+
+    color: #aeb4c0;
+
+    margin-bottom: 10px;
+
+    font-size: 14px;
+}
+
+/* CONTENT */
+
+.content {
+    flex: 1;
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.content-header h2 {
+    font-size: 24px;
+}
+
+.sort {
+    margin-left: auto;
+
+    background: #15181e;
+
+    border: 1px solid #2a2e36;
+
+    color: #c9ced8;
+
+    padding: 9px;
+
+    border-radius: 6px;
+}
+
+/* ASSET GRID */
+
+.asset-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(220px, 1fr));
+
+    gap: 20px;
+}
+
+.asset-card {
+    background: #12151a;
+
+    border: 1px solid #252932;
+
+    border-radius: 9px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s;
+
+    cursor: pointer;
+}
+
+.asset-card:hover {
+    transform: translateY(-3px);
+    border-color: #414858;
+}
+
+.asset-image {
+    height: 155px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #202630,
+            #12151a
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #6d7482;
+
+    font-size: 42px;
+}
+
+.asset-info {
+    padding: 15px;
+}
+
+.asset-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.asset-author {
+    color: #747b89;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.asset-bottom {
+    display: flex;
+    align-items: center;
+}
+
+.rating {
+    color: #e0b85c;
+    font-size: 13px;
+}
+
+.price {
+    margin-left: auto;
+
+    font-weight: bold;
+
+    color: #75d99a;
+}
+
+.price.paid {
+    color: #dce1ea;
+}
+
+/* PLUGIN BADGE */
+
+.plugin-badge {
+    display: inline-block;
+
+    background: #252c4a;
+    color: #91a1ff;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    padding: 4px 7px;
+
+    border-radius: 4px;
+
+    margin-bottom: 8px;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 50px;
+
+    border-top: 1px solid #252932;
+
+    padding: 35px;
+
+    text-align: center;
+
+    color: #686f7d;
+
+    font-size: 13px;
+}
+
+/* MODAL */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 500;
+}
+
+.modal {
+    width: 600px;
+    max-width: 90%;
+
+    background: #15181e;
+
+    border: 1px solid #303540;
+
+    border-radius: 12px;
+
+    padding: 25px;
+}
+
+.modal h2 {
+    margin-bottom: 10px;
+}
+
+.modal p {
+    color: #9ba2b0;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.download,
+.close {
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.download {
+    background: #596fd6;
+    color: white;
+    font-weight: bold;
+}
+
+.close {
+    background: #252a32;
+    color: white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 800px) {
+
+    nav {
+        display: none;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .hero {
+        padding: 45px 25px;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        Dark<span>Forge</span>
+    </div>
+
+    <nav>
+        <a href="#" class="active" onclick="showCategory('All Assets')">
+            Marketplace
+        </a>
+
+        <a href="#" onclick="showCategory('Plugins')">
+            Plugins
+        </a>
+
+        <a href="#" onclick="showCategory('3D Models')">
+            3D Models
+        </a>
+
+        <a href="#" onclick="showCategory('Textures')">
+            Textures
+        </a>
+
+        <a href="#" onclick="showCategory('Audio')">
+            Audio
+        </a>
+
+        <a href="#" onclick="showCategory('Tools')">
+            Tools
+        </a>
+    </nav>
+
+    <div class="header-right">
+
+        <input
+            class="search"
+            placeholder="Search marketplace..."
+            onkeyup="searchAssets(this.value)"
+        >
+
+        <button class="login-button">
+            Sign In
+        </button>
+
+        <button class="upload-button">
+            Upload
+        </button>
+
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Assets and <span>plugins</span>
+            for your next game.
+        </h1>
+
+        <p>
+            Discover models, textures, sounds, plugins,
+            tools, scripts and other resources created
+            by developers and artists.
+        </p>
+
+        <div class="hero-search">
+
+            <input
+                id="heroSearch"
+                placeholder="Search assets and plugins..."
+                onkeyup="searchAssets(this.value)"
+            >
+
+            <button>
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<main class="main">
+
+    <aside class="sidebar">
+
+        <h3>Marketplace</h3>
+
+        <div
+            class="category active"
+            onclick="showCategory('All Assets')"
+        >
+            All Assets
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('Plugins')"
+        >
+            🔌 Plugins
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('3D Models')"
+        >
+            3D Models
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('Textures')"
+        >
+            Textures
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('Materials')"
+        >
+            Materials
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('Animations')"
+        >
+            Animations
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('Audio')"
+        >
+            Audio
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('VFX')"
+        >
+            VFX
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('UI')"
+        >
+            UI
+        </div>
+
+        <div
+            class="category"
+            onclick="showCategory('Scripts')"
+        >
+            Scripts
+        </div>
+
+
+        <div class="filter-section">
+
+            <h3>Price</h3>
+
+            <label>
+                <input type="checkbox">
+                Free
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Under $10
+            </label>
+
+            <label>
+                <input type="checkbox">
+                $10 - $50
+            </label>
+
+        </div>
+
+    </aside>
+
+
+    <section class="content">
+
+        <div class="content-header">
+
+            <h2 id="sectionTitle">
+                Popular Assets
+            </h2>
+
+            <select class="sort">
+
+                <option>Most Popular</option>
+                <option>Newest</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="asset-grid" id="assetGrid">
+
+
+            <!-- PLUGIN -->
+
+            <div
+                class="asset-card"
+                data-name="Visual Scripting Pro"
+                data-category="Plugins"
+                onclick="openAsset('Visual Scripting Pro')"
+            >
+
+                <div class="asset-image">
+                    🔌
+                </div>
+
+                <div class="asset-info">
+
+                    <span class="plugin-badge">
+                        PLUGIN
+                    </span>
+
+                    <div class="asset-title">
+                        Visual Scripting Pro
+                    </div>
+
+                    <div class="asset-author">
+                        DarkForge Tools
+                    </div>
+
+                    <div class="asset-bottom">
+
+                        <div class="rating">
+                            ★★★★★
+                        </div>
+
+                        <div class="price paid">
+                            $14.99
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PLUGIN -->
+
+            <div
+                class="asset-card"
+                data-name="Advanced Dialogue System"
+                data-category="Plugins"
+                onclick="openAsset('Advanced Dialogue System')"
+            >
+
+                <div class="asset-image">
+                    💬
+                </div>
+
+                <div class="asset-info">
+
+                    <span class="plugin-badge">
+                        PLUGIN
+                    </span>
+
+                    <div class="asset-title">
+                        Advanced Dialogue System
+                    </div>
+
+                    <div class="asset-author">
+                        MoonStudio
+                    </div>
+
+                    <div class="asset-bottom">
+
+                        <div class="rating">
+                            ★★★★☆
+                        </div>
+
+                        <div class="price">
+                            FREE
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PLUGIN -->
+
+            <div
+                class="asset-card"
+                data-name="Save System"
+                data-category="Plugins"
+                onclick="openAsset('Save System')"
+            >
+
+                <div class="asset-image">
+                    💾
+                </div>
+
+                <div class="asset-info">
+
+                    <span class="plugin-badge">
+                        PLUGIN
+                    </span>
+
+                    <div class="asset-title">
+                        Save System
+                    </div>
+
+                    <div class="asset-author">
+                        VertexWorks
+                    </div>
+
+                    <div class="asset-bottom">
+
+                        <div class="rating">
+                            ★★★★★
+                        </div>
+
+                        <div class="price paid">
+                            $5.99
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NORMAL ASSET -->
+
+            <div
+                class="asset-card"
+                data-name="Sci-Fi Weapons Pack"
+                data-category="3D Models"
+                onclick="openAsset('Sci-Fi Weapons Pack')"
+            >
+
+                <div class="asset-image">
+                    🔫
+                </div>
+
+                <div class="asset-info">
+
+                    <div class="asset-title">
+                        Sci-Fi Weapons Pack
+                    </div>
+
+                    <div class="asset-author">
+                        DarkForge Studios
+                    </div>
+
+                    <div class="asset-bottom">
+
+                        <div class="rating">
+                            ★★★★★
+                        </div>
+
+                        <div class="price paid">
+                            $12.99
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="asset-card"
+                data-name="Stylized Forest"
+                data-category="3D Models"
+                onclick="openAsset('Stylized Forest')"
+            >
+
+                <div class="asset-image">
+                    🌲
+                </div>
+
+                <div class="asset-info">
+
+                    <div class="asset-title">
+                        Stylized Forest
+                    </div>
+
+                    <div class="asset-author">
+                        PixelTree
+                    </div>
+
+                    <div class="asset-bottom">
+
+                        <div class="rating">
+                            ★★★★☆
+                        </div>
+
+                        <div class="price">
+                            FREE
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="asset-card"
+                data-name="Fantasy Music Pack"
+                data-category="Audio"
+                onclick="openAsset('Fantasy Music Pack')"
+            >
+
+                <div class="asset-image">
+                    🎵
+                </div>
+
+                <div class="asset-info">
+
+                    <div class="asset-title">
+                        Fantasy Music Pack
+                    </div>
+
+                    <div class="asset-author">
+                        SoundForge
+                    </div>
+
+                    <div class="asset-bottom">
+
+                        <div class="rating">
+                            ★★★★☆
+                        </div>
+
+                        <div class="price">
+                            FREE
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    DarkForge Marketplace © 2026
+</footer>
+
+
+<!-- MODAL -->
+
+<div
+    class="modal-overlay"
+    id="modal"
+>
+
+    <div class="modal">
+
+        <h2 id="modalTitle">
+            Asset
+        </h2>
+
+        <p>
+            Asset information will appear here.
+            Eventually this page can display screenshots,
+            descriptions, supported engines, versions,
+            file sizes, licenses, dependencies,
+            changelog information and download options.
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                class="download"
+                onclick="downloadAsset()"
+            >
+                Download
+            </button>
+
+            <button
+                class="close"
+                onclick="closeModal()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openAsset(name) {
+
+    document.getElementById("modalTitle").innerText = name;
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+
+function closeModal() {
+
+    document.getElementById("modal").style.display = "none";
+}
+
+
+function downloadAsset() {
+
+    alert(
+        "The download system will be connected to Supabase Storage."
+    );
+}
+
+
+function searchAssets(query) {
+
+    query = query.toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".asset-card");
+
+    cards.forEach(card => {
+
+        const name =
+            card.dataset.name.toLowerCase();
+
+        card.style.display =
+            name.includes(query)
+                ? ""
+                : "none";
+    });
+}
+
+
+function showCategory(category) {
+
+    const cards =
+        document.querySelectorAll(".asset-card");
+
+    const title =
+        document.getElementById("sectionTitle");
+
+    document
+        .querySelectorAll(".category")
+        .forEach(item => {
+            item.classList.remove("active");
+        });
+
+
+    if (category === "All Assets") {
+
+        title.innerText = "Popular Assets";
+
+        cards.forEach(card => {
+            card.style.display = "";
+        });
+
+        return;
+    }
+
+
+    if (category === "Plugins") {
+
+        title.innerText = "Plugins";
+    }
+    else {
+
+        title.innerText = category;
+    }
+
+
+    cards.forEach(card => {
+
+        if (card.dataset.category === category) {
+
+            card.style.display = "";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+}
+
+
+document
+    .getElementById("modal")
+    .addEventListener("click", function(e) {
+
+        if (e.target === this) {
+            closeModal();
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+```
