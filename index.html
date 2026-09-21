@@ -2,1011 +2,971 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DarkForge Marketplace</title>
-
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #0b0d10;
-    color: #e8eaf0;
-}
-
-/* HEADER */
-
-header {
-    height: 70px;
-    background: #111419;
-    border-bottom: 1px solid #252932;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 30px;
-
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: white;
-    margin-right: 40px;
-}
-
-.logo span {
-    color: #6c8cff;
-}
-
-nav {
-    display: flex;
-    gap: 25px;
-}
-
-nav a {
-    color: #aeb4c0;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-nav a:hover,
-nav a.active {
-    color: white;
-}
-
-nav a.active {
-    color: #8195ff;
-}
-
-.header-right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.search {
-    background: #191d24;
-    border: 1px solid #292e38;
-    border-radius: 8px;
-
-    padding: 10px 14px;
-    width: 240px;
-
-    color: white;
-    outline: none;
-}
-
-.login-button,
-.upload-button {
-    padding: 10px 16px;
-    border-radius: 7px;
-    cursor: pointer;
-}
-
-.login-button {
-    background: transparent;
-    border: 1px solid #343945;
-    color: #dce0e8;
-}
-
-.upload-button {
-    background: #596fd6;
-    border: none;
-    color: white;
-    font-weight: bold;
-}
-
-/* HERO */
-
-.hero {
-    padding: 70px 50px;
-
-    background:
-        radial-gradient(
-            circle at 70% 40%,
-            rgba(75, 95, 180, 0.18),
-            transparent 40%
-        );
-
-    border-bottom: 1px solid #20242c;
-}
-
-.hero-content {
-    max-width: 1200px;
-    margin: auto;
-}
-
-.hero h1 {
-    font-size: 46px;
-    margin-bottom: 15px;
-}
-
-.hero h1 span {
-    color: #7086ed;
-}
-
-.hero p {
-    color: #9299a7;
-    max-width: 650px;
-    line-height: 1.6;
-    font-size: 17px;
-    margin-bottom: 25px;
-}
-
-.hero-search {
-    display: flex;
-    max-width: 650px;
-}
-
-.hero-search input {
-    flex: 1;
-
-    background: #15181e;
-    border: 1px solid #303540;
-
-    border-radius: 8px 0 0 8px;
-
-    padding: 15px;
-
-    color: white;
-    font-size: 15px;
-    outline: none;
-}
-
-.hero-search button {
-    background: #596fd6;
-    border: none;
-
-    padding: 0 25px;
-
-    color: white;
-    font-weight: bold;
-
-    border-radius: 0 8px 8px 0;
-
-    cursor: pointer;
-}
-
-/* MAIN */
-
-.main {
-    max-width: 1250px;
-
-    margin: auto;
-    padding: 40px 25px;
-
-    display: flex;
-    gap: 35px;
-}
-
-/* SIDEBAR */
-
-.sidebar {
-    width: 210px;
-    flex-shrink: 0;
-}
-
-.sidebar h3 {
-    font-size: 14px;
-    color: #8e95a3;
-
-    margin-bottom: 15px;
-
-    text-transform: uppercase;
-}
-
-.category {
-    padding: 10px 12px;
-
-    border-radius: 6px;
-
-    color: #aeb4c0;
-
-    cursor: pointer;
-
-    margin-bottom: 3px;
-
-    font-size: 14px;
-}
-
-.category:hover {
-    background: #171b21;
-    color: white;
-}
-
-.category.active {
-    background: #202637;
-    color: #8195ff;
-}
-
-.filter-section {
-    border-top: 1px solid #252932;
-
-    margin-top: 25px;
-    padding-top: 20px;
-}
-
-.filter-section label {
-    display: block;
-
-    color: #aeb4c0;
-
-    margin-bottom: 10px;
-
-    font-size: 14px;
-}
-
-/* CONTENT */
-
-.content {
-    flex: 1;
-}
-
-.content-header {
-    display: flex;
-    align-items: center;
-
-    margin-bottom: 25px;
-}
-
-.content-header h2 {
-    font-size: 24px;
-}
-
-.sort {
-    margin-left: auto;
-
-    background: #15181e;
-
-    border: 1px solid #2a2e36;
-
-    color: #c9ced8;
-
-    padding: 9px;
-
-    border-radius: 6px;
-}
-
-/* ASSET GRID */
-
-.asset-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fill, minmax(220px, 1fr));
-
-    gap: 20px;
-}
-
-.asset-card {
-    background: #12151a;
-
-    border: 1px solid #252932;
-
-    border-radius: 9px;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.2s,
-        border-color 0.2s;
-
-    cursor: pointer;
-}
-
-.asset-card:hover {
-    transform: translateY(-3px);
-    border-color: #414858;
-}
-
-.asset-image {
-    height: 155px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #202630,
-            #12151a
-        );
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #6d7482;
-
-    font-size: 42px;
-}
-
-.asset-info {
-    padding: 15px;
-}
-
-.asset-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-.asset-author {
-    color: #747b89;
-    font-size: 12px;
-    margin-bottom: 12px;
-}
-
-.asset-bottom {
-    display: flex;
-    align-items: center;
-}
-
-.rating {
-    color: #e0b85c;
-    font-size: 13px;
-}
-
-.price {
-    margin-left: auto;
-
-    font-weight: bold;
-
-    color: #75d99a;
-}
-
-.price.paid {
-    color: #dce1ea;
-}
-
-/* PLUGIN BADGE */
-
-.plugin-badge {
-    display: inline-block;
-
-    background: #252c4a;
-    color: #91a1ff;
-
-    font-size: 11px;
-    font-weight: bold;
-
-    padding: 4px 7px;
-
-    border-radius: 4px;
-
-    margin-bottom: 8px;
-}
-
-/* FOOTER */
-
-footer {
-    margin-top: 50px;
-
-    border-top: 1px solid #252932;
-
-    padding: 35px;
-
-    text-align: center;
-
-    color: #686f7d;
-
-    font-size: 13px;
-}
-
-/* MODAL */
-
-.modal-overlay {
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.75);
-
-    display: none;
-
-    align-items: center;
-    justify-content: center;
-
-    z-index: 500;
-}
-
-.modal {
-    width: 600px;
-    max-width: 90%;
-
-    background: #15181e;
-
-    border: 1px solid #303540;
-
-    border-radius: 12px;
-
-    padding: 25px;
-}
-
-.modal h2 {
-    margin-bottom: 10px;
-}
-
-.modal p {
-    color: #9ba2b0;
-
-    line-height: 1.6;
-
-    margin-bottom: 20px;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.download,
-.close {
-    border: none;
-
-    padding: 12px 20px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-}
-
-.download {
-    background: #596fd6;
-    color: white;
-    font-weight: bold;
-}
-
-.close {
-    background: #252a32;
-    color: white;
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 800px) {
-
-    nav {
-        display: none;
-    }
-
-    .search {
-        display: none;
-    }
-
-    .main {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-    }
-
-    .hero {
-        padding: 45px 25px;
-    }
-
-    .hero h1 {
-        font-size: 35px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elintria Marketplace</title>
+
+    <!-- Supabase JavaScript SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0b0d12;
+            --bg2: #10131a;
+            --panel: #141821;
+            --panel2: #191e29;
+            --border: #282e3b;
+            --text: #f1f3f7;
+            --muted: #8f98aa;
+            --accent: #6d7cff;
+            --accent-hover: #8290ff;
+            --green: #45d483;
+            --red: #ff6262;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* HEADER */
+
+        header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(11, 13, 18, 0.96);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            margin-left: 30px;
+            margin-right: auto;
+        }
+
+        nav button,
+        .nav-button {
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        nav button:hover,
+        nav button.active {
+            background: var(--panel2);
+            color: var(--text);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search {
+            width: 230px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 13px;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search:focus {
+            border-color: var(--accent);
+        }
+
+        .login-btn,
+        .account-btn {
+            border: 0;
+            background: var(--accent);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .login-btn:hover,
+        .account-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* LAYOUT */
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        aside {
+            width: 230px;
+            border-right: 1px solid var(--border);
+            padding: 25px 16px;
+            flex-shrink: 0;
+            background: var(--bg2);
+        }
+
+        .side-title {
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 10px;
+        }
+
+        .side-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            padding: 11px 12px;
+            border-radius: 8px;
+            text-align: left;
+            margin-bottom: 3px;
+        }
+
+        .side-btn:hover,
+        .side-btn.active {
+            background: var(--panel2);
+            color: white;
+        }
+
+        main {
+            flex: 1;
+            padding: 30px;
+            min-width: 0;
+        }
+
+        .hero {
+            padding: 5px 0 30px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 700px;
+        }
+
+        /* TOOLBAR */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 8px 12px;
+            border-radius: 7px;
+        }
+
+        .filter.active,
+        .filter:hover {
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .sort {
+            background: var(--panel);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 9px 12px;
+            border-radius: 7px;
+        }
+
+        /* CARDS */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform .15s ease, border-color .15s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #3c4558;
+        }
+
+        .card-image {
+            height: 145px;
+            background:
+                radial-gradient(circle at 20% 30%, #38446e, transparent 28%),
+                radial-gradient(circle at 80% 70%, #252d58, transparent 30%),
+                linear-gradient(135deg, #161b29, #0e1118);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 43px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 9px;
+        }
+
+        .badge {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding: 4px 7px;
+            border-radius: 5px;
+            background: #242a38;
+            color: #aab4ca;
+        }
+
+        .badge.plugin {
+            background: #252052;
+            color: #aaa3ff;
+        }
+
+        .badge.free {
+            background: #173524;
+            color: #67dc96;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+            min-height: 38px;
+        }
+
+        .card-bottom {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .rating {
+            color: #ffc95a;
+            font-size: 13px;
+        }
+
+        .view-btn {
+            margin-top: 12px;
+            width: 100%;
+            padding: 9px;
+            border-radius: 7px;
+            border: 1px solid var(--border);
+            background: var(--panel2);
+            color: white;
+        }
+
+        .view-btn:hover {
+            border-color: var(--accent);
+        }
+
+        /* EMPTY */
+
+        .empty {
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--muted);
+            display: none;
+        }
+
+        /* MODALS */
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.72);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            padding: 20px;
+        }
+
+        .modal-backdrop.show {
+            display: flex;
+        }
+
+        .modal {
+            width: min(470px, 100%);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 25px;
+            box-shadow: 0 25px 80px rgba(0,0,0,.45);
+        }
+
+        .modal.large {
+            width: min(800px, 100%);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            background: transparent;
+            border: 0;
+            color: var(--muted);
+            font-size: 23px;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .modal input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            outline: none;
+            margin-top: 7px;
+            margin-bottom: 14px;
+        }
+
+        .modal input:focus {
+            border-color: var(--accent);
+        }
+
+        .modal label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .primary {
+            width: 100%;
+            border: 0;
+            background: var(--accent);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .secondary {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: var(--panel2);
+            color: white;
+            padding: 11px;
+            border-radius: 8px;
+            margin-top: 9px;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 15px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .auth-switch button {
+            background: transparent;
+            border: 0;
+            color: var(--accent-hover);
+        }
+
+        .message {
+            margin-bottom: 14px;
+            font-size: 13px;
+            padding: 10px;
+            border-radius: 7px;
+            display: none;
+        }
+
+        .message.error {
+            display: block;
+            background: #3a1d22;
+            color: #ff9c9c;
+        }
+
+        .message.success {
+            display: block;
+            background: #183424;
+            color: #82e6a7;
+        }
+
+        /* ACCOUNT */
+
+        .account-area {
+            position: relative;
+        }
+
+        .account-menu {
+            position: absolute;
+            right: 0;
+            top: 45px;
+            width: 220px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px;
+            display: none;
+            z-index: 200;
+            box-shadow: 0 15px 40px rgba(0,0,0,.4);
+        }
+
+        .account-menu.show {
+            display: block;
+        }
+
+        .account-email {
+            padding: 10px;
+            color: var(--muted);
+            font-size: 12px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .account-menu button {
+            width: 100%;
+            background: transparent;
+            border: 0;
+            color: var(--text);
+            padding: 10px;
+            text-align: left;
+            border-radius: 7px;
+        }
+
+        .account-menu button:hover {
+            background: var(--panel2);
+        }
+
+        .admin-menu {
+            display: none;
+        }
+
+        .admin-menu.visible {
+            display: block;
+        }
+
+        /* ADMIN */
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .stat-value {
+            font-size: 30px;
+            margin-top: 7px;
+            font-weight: 800;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-actions button {
+            border: 0;
+            padding: 11px 15px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: white;
+        }
+
+        /* ASSET DETAILS */
+
+        .detail-icon {
+            height: 220px;
+            background:
+                radial-gradient(circle at 25% 30%, #38446e, transparent 28%),
+                radial-gradient(circle at 75% 70%, #252d58, transparent 30%),
+                linear-gradient(135deg, #161b29, #0e1118);
+            border-radius: 9px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 65px;
+            margin-bottom: 20px;
+        }
+
+        .detail-description {
+            color: var(--muted);
+            line-height: 1.6;
+            margin: 10px 0 20px;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .detail-actions button {
+            flex: 1;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+            header {
+                padding: 0 15px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .search {
+                width: 150px;
+            }
+
+            aside {
+                display: none;
+            }
+
+            main {
+                padding: 20px 15px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .search {
+                display: none;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-
     <div class="logo">
-        Dark<span>Forge</span>
+        Elintria<span>Marketplace</span>
     </div>
 
     <nav>
-        <a href="#" class="active" onclick="showCategory('All Assets')">
-            Marketplace
-        </a>
+        <button id="navAssets" class="active" onclick="showSection('assets')">
+            Assets
+        </button>
 
-        <a href="#" onclick="showCategory('Plugins')">
+        <button id="navPlugins" onclick="showSection('plugins')">
             Plugins
-        </a>
-
-        <a href="#" onclick="showCategory('3D Models')">
-            3D Models
-        </a>
-
-        <a href="#" onclick="showCategory('Textures')">
-            Textures
-        </a>
-
-        <a href="#" onclick="showCategory('Audio')">
-            Audio
-        </a>
-
-        <a href="#" onclick="showCategory('Tools')">
-            Tools
-        </a>
+        </button>
     </nav>
 
     <div class="header-right">
-
         <input
+            id="searchInput"
             class="search"
-            placeholder="Search marketplace..."
-            onkeyup="searchAssets(this.value)"
+            type="text"
+            placeholder="Search assets..."
+            oninput="renderMarketplace()"
         >
 
-        <button class="login-button">
+        <button id="loginButton" class="login-btn" onclick="openAuthModal()">
             Sign In
         </button>
 
-        <button class="upload-button">
-            Upload
-        </button>
+        <div id="accountArea" class="account-area" style="display:none;">
+            <button class="account-btn" onclick="toggleAccountMenu()">
+                Account
+            </button>
 
+            <div id="accountMenu" class="account-menu">
+                <div id="accountEmail" class="account-email"></div>
+
+                <button
+                    id="adminMenuButton"
+                    class="admin-menu"
+                    onclick="openAdminPanel()"
+                >
+                    ⚙ Admin Panel
+                </button>
+
+                <button onclick="signOut()">
+                    Sign Out
+                </button>
+            </div>
+        </div>
     </div>
-
 </header>
 
 
-<section class="hero">
+<div class="layout">
 
-    <div class="hero-content">
+    <aside>
+        <div class="side-title">Marketplace</div>
 
-        <h1>
-            Assets and <span>plugins</span>
-            for your next game.
-        </h1>
-
-        <p>
-            Discover models, textures, sounds, plugins,
-            tools, scripts and other resources created
-            by developers and artists.
-        </p>
-
-        <div class="hero-search">
-
-            <input
-                id="heroSearch"
-                placeholder="Search assets and plugins..."
-                onkeyup="searchAssets(this.value)"
-            >
-
-            <button>
-                Search
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<main class="main">
-
-    <aside class="sidebar">
-
-        <h3>Marketplace</h3>
-
-        <div
-            class="category active"
-            onclick="showCategory('All Assets')"
+        <button
+            id="sideAll"
+            class="side-btn active"
+            onclick="setCategory('All')"
         >
-            All Assets
-        </div>
+            🛒 All Items
+        </button>
 
-        <div
-            class="category"
-            onclick="showCategory('Plugins')"
+        <button
+            class="side-btn"
+            onclick="setCategory('3D')"
+        >
+            🧱 3D Assets
+        </button>
+
+        <button
+            class="side-btn"
+            onclick="setCategory('Audio')"
+        >
+            🎵 Audio
+        </button>
+
+        <button
+            class="side-btn"
+            onclick="setCategory('UI')"
+        >
+            🖥 UI
+        </button>
+
+        <button
+            class="side-btn"
+            onclick="setCategory('VFX')"
+        >
+            ✨ VFX
+        </button>
+
+        <button
+            id="sidePlugins"
+            class="side-btn"
+            onclick="showSection('plugins')"
         >
             🔌 Plugins
+        </button>
+
+        <div class="side-title" style="margin-top:30px;">
+            Price
         </div>
 
-        <div
-            class="category"
-            onclick="showCategory('3D Models')"
-        >
-            3D Models
-        </div>
+        <button class="side-btn" onclick="setPriceFilter('all')">
+            Any Price
+        </button>
 
-        <div
-            class="category"
-            onclick="showCategory('Textures')"
-        >
-            Textures
-        </div>
+        <button class="side-btn" onclick="setPriceFilter('free')">
+            Free
+        </button>
 
-        <div
-            class="category"
-            onclick="showCategory('Materials')"
-        >
-            Materials
-        </div>
-
-        <div
-            class="category"
-            onclick="showCategory('Animations')"
-        >
-            Animations
-        </div>
-
-        <div
-            class="category"
-            onclick="showCategory('Audio')"
-        >
-            Audio
-        </div>
-
-        <div
-            class="category"
-            onclick="showCategory('VFX')"
-        >
-            VFX
-        </div>
-
-        <div
-            class="category"
-            onclick="showCategory('UI')"
-        >
-            UI
-        </div>
-
-        <div
-            class="category"
-            onclick="showCategory('Scripts')"
-        >
-            Scripts
-        </div>
-
-
-        <div class="filter-section">
-
-            <h3>Price</h3>
-
-            <label>
-                <input type="checkbox">
-                Free
-            </label>
-
-            <label>
-                <input type="checkbox">
-                Under $10
-            </label>
-
-            <label>
-                <input type="checkbox">
-                $10 - $50
-            </label>
-
-        </div>
-
+        <button class="side-btn" onclick="setPriceFilter('paid')">
+            Paid
+        </button>
     </aside>
 
 
-    <section class="content">
+    <main>
 
-        <div class="content-header">
+        <section class="hero">
+            <h1 id="sectionTitle">Game Assets</h1>
 
-            <h2 id="sectionTitle">
-                Popular Assets
-            </h2>
+            <p id="sectionDescription">
+                Discover assets, plugins, tools and resources for your games.
+            </p>
+        </section>
 
-            <select class="sort">
 
-                <option>Most Popular</option>
-                <option>Newest</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
+        <div class="toolbar">
 
+            <div class="filters">
+                <button
+                    class="filter active"
+                    id="filterAll"
+                    onclick="setCategory('All')"
+                >
+                    All
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setCategory('3D')"
+                >
+                    3D
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setCategory('Audio')"
+                >
+                    Audio
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setCategory('UI')"
+                >
+                    UI
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setCategory('VFX')"
+                >
+                    VFX
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setCategory('Plugin')"
+                >
+                    Plugins
+                </button>
+            </div>
+
+            <select
+                id="sortSelect"
+                class="sort"
+                onchange="renderMarketplace()"
+            >
+                <option value="newest">Newest</option>
+                <option value="priceLow">Price: Low to High</option>
+                <option value="priceHigh">Price: High to Low</option>
+                <option value="rating">Rating</option>
             </select>
 
         </div>
 
 
-        <div class="asset-grid" id="assetGrid">
+        <div id="assetGrid" class="grid"></div>
 
-
-            <!-- PLUGIN -->
-
-            <div
-                class="asset-card"
-                data-name="Visual Scripting Pro"
-                data-category="Plugins"
-                onclick="openAsset('Visual Scripting Pro')"
-            >
-
-                <div class="asset-image">
-                    🔌
-                </div>
-
-                <div class="asset-info">
-
-                    <span class="plugin-badge">
-                        PLUGIN
-                    </span>
-
-                    <div class="asset-title">
-                        Visual Scripting Pro
-                    </div>
-
-                    <div class="asset-author">
-                        DarkForge Tools
-                    </div>
-
-                    <div class="asset-bottom">
-
-                        <div class="rating">
-                            ★★★★★
-                        </div>
-
-                        <div class="price paid">
-                            $14.99
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PLUGIN -->
-
-            <div
-                class="asset-card"
-                data-name="Advanced Dialogue System"
-                data-category="Plugins"
-                onclick="openAsset('Advanced Dialogue System')"
-            >
-
-                <div class="asset-image">
-                    💬
-                </div>
-
-                <div class="asset-info">
-
-                    <span class="plugin-badge">
-                        PLUGIN
-                    </span>
-
-                    <div class="asset-title">
-                        Advanced Dialogue System
-                    </div>
-
-                    <div class="asset-author">
-                        MoonStudio
-                    </div>
-
-                    <div class="asset-bottom">
-
-                        <div class="rating">
-                            ★★★★☆
-                        </div>
-
-                        <div class="price">
-                            FREE
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PLUGIN -->
-
-            <div
-                class="asset-card"
-                data-name="Save System"
-                data-category="Plugins"
-                onclick="openAsset('Save System')"
-            >
-
-                <div class="asset-image">
-                    💾
-                </div>
-
-                <div class="asset-info">
-
-                    <span class="plugin-badge">
-                        PLUGIN
-                    </span>
-
-                    <div class="asset-title">
-                        Save System
-                    </div>
-
-                    <div class="asset-author">
-                        VertexWorks
-                    </div>
-
-                    <div class="asset-bottom">
-
-                        <div class="rating">
-                            ★★★★★
-                        </div>
-
-                        <div class="price paid">
-                            $5.99
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- NORMAL ASSET -->
-
-            <div
-                class="asset-card"
-                data-name="Sci-Fi Weapons Pack"
-                data-category="3D Models"
-                onclick="openAsset('Sci-Fi Weapons Pack')"
-            >
-
-                <div class="asset-image">
-                    🔫
-                </div>
-
-                <div class="asset-info">
-
-                    <div class="asset-title">
-                        Sci-Fi Weapons Pack
-                    </div>
-
-                    <div class="asset-author">
-                        DarkForge Studios
-                    </div>
-
-                    <div class="asset-bottom">
-
-                        <div class="rating">
-                            ★★★★★
-                        </div>
-
-                        <div class="price paid">
-                            $12.99
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="asset-card"
-                data-name="Stylized Forest"
-                data-category="3D Models"
-                onclick="openAsset('Stylized Forest')"
-            >
-
-                <div class="asset-image">
-                    🌲
-                </div>
-
-                <div class="asset-info">
-
-                    <div class="asset-title">
-                        Stylized Forest
-                    </div>
-
-                    <div class="asset-author">
-                        PixelTree
-                    </div>
-
-                    <div class="asset-bottom">
-
-                        <div class="rating">
-                            ★★★★☆
-                        </div>
-
-                        <div class="price">
-                            FREE
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="asset-card"
-                data-name="Fantasy Music Pack"
-                data-category="Audio"
-                onclick="openAsset('Fantasy Music Pack')"
-            >
-
-                <div class="asset-image">
-                    🎵
-                </div>
-
-                <div class="asset-info">
-
-                    <div class="asset-title">
-                        Fantasy Music Pack
-                    </div>
-
-                    <div class="asset-author">
-                        SoundForge
-                    </div>
-
-                    <div class="asset-bottom">
-
-                        <div class="rating">
-                            ★★★★☆
-                        </div>
-
-                        <div class="price">
-                            FREE
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div id="emptyMessage" class="empty">
+            No assets found.
         </div>
 
-    </section>
+    </main>
 
-</main>
-
-
-<footer>
-    DarkForge Marketplace © 2026
-</footer>
+</div>
 
 
-<!-- MODAL -->
+<!-- AUTH MODAL -->
 
-<div
-    class="modal-overlay"
-    id="modal"
->
+<div id="authModal" class="modal-backdrop">
 
     <div class="modal">
 
-        <h2 id="modalTitle">
-            Asset
-        </h2>
-
-        <p>
-            Asset information will appear here.
-            Eventually this page can display screenshots,
-            descriptions, supported engines, versions,
-            file sizes, licenses, dependencies,
-            changelog information and download options.
-        </p>
-
-        <div class="modal-actions">
+        <div class="modal-header">
+            <h2 id="authTitle">Sign In</h2>
 
             <button
-                class="download"
+                class="close"
+                onclick="closeModal('authModal')"
+            >
+                ×
+            </button>
+        </div>
+
+        <div id="authMessage" class="message"></div>
+
+        <div id="usernameContainer" style="display:none;">
+            <label>Username</label>
+
+            <input
+                id="usernameInput"
+                type="text"
+                placeholder="Your username"
+            >
+        </div>
+
+        <label>Email</label>
+
+        <input
+            id="emailInput"
+            type="email"
+            placeholder="you@example.com"
+        >
+
+        <label>Password</label>
+
+        <input
+            id="passwordInput"
+            type="password"
+            placeholder="Password"
+        >
+
+        <button
+            id="authSubmit"
+            class="primary"
+            onclick="submitAuth()"
+        >
+            Sign In
+        </button>
+
+        <div class="auth-switch">
+            <span id="authSwitchText">
+                Don't have an account?
+            </span>
+
+            <button onclick="toggleAuthMode()">
+                <span id="authSwitchButton">Create one</span>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ASSET DETAILS MODAL -->
+
+<div id="assetModal" class="modal-backdrop">
+
+    <div class="modal large">
+
+        <div class="modal-header">
+            <h2 id="detailTitle"></h2>
+
+            <button
+                class="close"
+                onclick="closeModal('assetModal')"
+            >
+                ×
+            </button>
+        </div>
+
+        <div id="detailIcon" class="detail-icon"></div>
+
+        <div id="detailBadges" class="badges"></div>
+
+        <div
+            id="detailDescription"
+            class="detail-description"
+        ></div>
+
+        <div class="card-bottom">
+            <span
+                id="detailPrice"
+                class="price"
+            ></span>
+
+            <span
+                id="detailRating"
+                class="rating"
+            ></span>
+        </div>
+
+        <div class="detail-actions">
+
+            <button
+                class="primary"
                 onclick="downloadAsset()"
             >
                 Download
             </button>
 
             <button
-                class="close"
-                onclick="closeModal()"
+                class="secondary"
+                onclick="closeModal('assetModal')"
             >
                 Close
             </button>
@@ -1018,112 +978,1359 @@ footer {
 </div>
 
 
+<!-- ADMIN PANEL -->
+
+<div id="adminModal" class="modal-backdrop">
+
+    <div class="modal large">
+
+        <div class="modal-header">
+            <h2>Admin Panel</h2>
+
+            <button
+                class="close"
+                onclick="closeModal('adminModal')"
+            >
+                ×
+            </button>
+        </div>
+
+        <div class="admin-grid">
+
+            <div class="stat">
+                <div class="stat-label">
+                    Users
+                </div>
+
+                <div
+                    id="userCount"
+                    class="stat-value"
+                >
+                    -
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-label">
+                    Assets
+                </div>
+
+                <div
+                    id="assetCount"
+                    class="stat-value"
+                >
+                    -
+                </div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-label">
+                    Plugins
+                </div>
+
+                <div
+                    id="pluginCount"
+                    class="stat-value"
+                >
+                    -
+                </div>
+            </div>
+
+        </div>
+
+        <div class="admin-actions">
+
+            <button onclick="adminUploadPlaceholder()">
+                Upload Asset
+            </button>
+
+            <button onclick="closeModal('adminModal')">
+                Close
+            </button>
+
+        </div>
+
+        <p style="
+            color:var(--muted);
+            margin-top:20px;
+            font-size:13px;
+            line-height:1.6;
+        ">
+            This panel is protected by Supabase authentication.
+            Database permissions should also be enforced using
+            Supabase Row Level Security (RLS).
+        </p>
+
+    </div>
+
+</div>
+
+
 <script>
 
-function openAsset(name) {
+    /*
+     ============================================================
+        SUPABASE CONFIGURATION
+     ============================================================
 
-    document.getElementById("modalTitle").innerText = name;
+        Replace these two values with your Supabase project values.
 
-    document.getElementById("modal").style.display = "flex";
-}
+        IMPORTANT:
+        The publishable/anon key is okay to use in browser code.
 
+        NEVER put your Supabase service_role/secret key here.
+     */
 
-function closeModal() {
+    const SUPABASE_URL =
+        "YOUR_SUPABASE_PROJECT_URL";
 
-    document.getElementById("modal").style.display = "none";
-}
-
-
-function downloadAsset() {
-
-    alert(
-        "The download system will be connected to Supabase Storage."
-    );
-}
+    const SUPABASE_PUBLISHABLE_KEY =
+        "YOUR_SUPABASE_PUBLISHABLE_KEY";
 
 
-function searchAssets(query) {
+    let supabaseClient = null;
 
-    query = query.toLowerCase();
+    if (
+        SUPABASE_URL !== "YOUR_SUPABASE_PROJECT_URL" &&
+        SUPABASE_PUBLISHABLE_KEY !== "YOUR_SUPABASE_PUBLISHABLE_KEY"
+    ) {
+        supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+    }
 
-    const cards =
-        document.querySelectorAll(".asset-card");
 
-    cards.forEach(card => {
+    /*
+     ============================================================
+        MARKETPLACE DATA
+     ============================================================
+     */
 
-        const name =
-            card.dataset.name.toLowerCase();
+    const marketplaceAssets = [
 
-        card.style.display =
-            name.includes(query)
-                ? ""
-                : "none";
+        {
+            id: 1,
+            title: "Visual Scripting Pro",
+            description:
+                "Node-based visual scripting tools for building gameplay without writing traditional code.",
+            category: "Plugin",
+            price: 14.99,
+            rating: 4.9,
+            icon: "🔌",
+            date: "2026-09-20"
+        },
+
+        {
+            id: 2,
+            title: "Advanced Dialogue System",
+            description:
+                "Create branching conversations, dialogue trees and interactive NPC conversations.",
+            category: "Plugin",
+            price: 0,
+            rating: 4.8,
+            icon: "💬",
+            date: "2026-09-18"
+        },
+
+        {
+            id: 3,
+            title: "Save System",
+            description:
+                "Simple and expandable save/load system for your game projects.",
+            category: "Plugin",
+            price: 5.99,
+            rating: 4.7,
+            icon: "💾",
+            date: "2026-09-15"
+        },
+
+        {
+            id: 4,
+            title: "Sci-Fi Weapons Pack",
+            description:
+                "A collection of futuristic weapons designed for FPS and sci-fi games.",
+            category: "3D",
+            price: 12.99,
+            rating: 4.8,
+            icon: "🔫",
+            date: "2026-09-12"
+        },
+
+        {
+            id: 5,
+            title: "Stylized Forest",
+            description:
+                "Stylized trees, rocks, plants and environmental assets for fantasy games.",
+            category: "3D",
+            price: 0,
+            rating: 4.6,
+            icon: "🌲",
+            date: "2026-09-10"
+        },
+
+        {
+            id: 6,
+            title: "Fantasy Music Pack",
+            description:
+                "Fantasy background music and atmospheric tracks for RPG projects.",
+            category: "Audio",
+            price: 0,
+            rating: 4.9,
+            icon: "🎵",
+            date: "2026-09-05"
+        },
+
+        {
+            id: 7,
+            title: "Modern Game UI",
+            description:
+                "Modern menus, HUD components, buttons and interface elements.",
+            category: "UI",
+            price: 7.99,
+            rating: 4.5,
+            icon: "🖥",
+            date: "2026-09-03"
+        },
+
+        {
+            id: 8,
+            title: "Explosion VFX Pack",
+            description:
+                "Real-time explosion, smoke, fire and impact visual effects.",
+            category: "VFX",
+            price: 9.99,
+            rating: 4.7,
+            icon: "💥",
+            date: "2026-08-30"
+        }
+
+    ];
+
+
+    let currentCategory = "All";
+    let currentPriceFilter = "all";
+    let currentAsset = null;
+
+    let authMode = "login";
+
+    let currentUser = null;
+    let currentProfile = null;
+
+
+    /*
+     ============================================================
+        INITIALIZATION
+     ============================================================
+     */
+
+    document.addEventListener("DOMContentLoaded", async () => {
+
+        renderMarketplace();
+
+        if (!supabaseClient) {
+            console.warn(
+                "Supabase is not configured yet. Replace the placeholder values."
+            );
+
+            return;
+        }
+
+        await initializeAuth();
+
     });
-}
 
 
-function showCategory(category) {
+    /*
+     ============================================================
+        AUTHENTICATION
+     ============================================================
+     */
 
-    const cards =
-        document.querySelectorAll(".asset-card");
+    async function initializeAuth() {
 
-    const title =
-        document.getElementById("sectionTitle");
+        const {
+            data: {
+                session
+            }
+        } = await supabaseClient.auth.getSession();
 
-    document
-        .querySelectorAll(".category")
-        .forEach(item => {
-            item.classList.remove("active");
-        });
+        await handleSession(
+            session
+                ? session.user
+                : null
+        );
 
 
-    if (category === "All Assets") {
+        supabaseClient.auth.onAuthStateChange(
+            async (_event, session) => {
 
-        title.innerText = "Popular Assets";
+                await handleSession(
+                    session
+                        ? session.user
+                        : null
+                );
 
-        cards.forEach(card => {
-            card.style.display = "";
-        });
+            }
+        );
 
-        return;
     }
 
 
-    if (category === "Plugins") {
+    async function handleSession(user) {
 
-        title.innerText = "Plugins";
+        currentUser = user;
+        currentProfile = null;
+
+        if (!user) {
+
+            document.getElementById(
+                "loginButton"
+            ).style.display = "block";
+
+            document.getElementById(
+                "accountArea"
+            ).style.display = "none";
+
+            document.getElementById(
+                "adminMenuButton"
+            ).classList.remove("visible");
+
+            return;
+        }
+
+
+        document.getElementById(
+            "loginButton"
+        ).style.display = "none";
+
+        document.getElementById(
+            "accountArea"
+        ).style.display = "block";
+
+        document.getElementById(
+            "accountEmail"
+        ).textContent = user.email || "Signed in";
+
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("profiles")
+            .select("id, username, role")
+            .eq("id", user.id)
+            .single();
+
+
+        if (!error && data) {
+
+            currentProfile = data;
+
+            if (data.role === "admin") {
+
+                document.getElementById(
+                    "adminMenuButton"
+                ).classList.add("visible");
+
+            } else {
+
+                document.getElementById(
+                    "adminMenuButton"
+                ).classList.remove("visible");
+
+            }
+
+        }
+
     }
-    else {
 
-        title.innerText = category;
+
+    function openAuthModal() {
+
+        authMode = "login";
+
+        updateAuthModal();
+
+        document
+            .getElementById("authModal")
+            .classList.add("show");
+
     }
 
 
-    cards.forEach(card => {
+    function toggleAuthMode() {
 
-        if (card.dataset.category === category) {
+        authMode =
+            authMode === "login"
+                ? "signup"
+                : "login";
 
-            card.style.display = "";
+        updateAuthModal();
+
+    }
+
+
+    function updateAuthModal() {
+
+        const login =
+            authMode === "login";
+
+
+        document.getElementById(
+            "authTitle"
+        ).textContent =
+            login
+                ? "Sign In"
+                : "Create Account";
+
+
+        document.getElementById(
+            "authSubmit"
+        ).textContent =
+            login
+                ? "Sign In"
+                : "Create Account";
+
+
+        document.getElementById(
+            "usernameContainer"
+        ).style.display =
+            login
+                ? "none"
+                : "block";
+
+
+        document.getElementById(
+            "authSwitchText"
+        ).textContent =
+            login
+                ? "Don't have an account?"
+                : "Already have an account?";
+
+
+        document.getElementById(
+            "authSwitchButton"
+        ).textContent =
+            login
+                ? "Create one"
+                : "Sign in";
+
+
+        clearAuthMessage();
+
+    }
+
+
+    async function submitAuth() {
+
+        if (!supabaseClient) {
+
+            showAuthMessage(
+                "Supabase is not configured yet. Add your Supabase URL and publishable key to index.html.",
+                true
+            );
+
+            return;
+        }
+
+
+        const email =
+            document.getElementById(
+                "emailInput"
+            ).value.trim();
+
+
+        const password =
+            document.getElementById(
+                "passwordInput"
+            ).value;
+
+
+        const username =
+            document.getElementById(
+                "usernameInput"
+            ).value.trim();
+
+
+        if (!email || !password) {
+
+            showAuthMessage(
+                "Please enter an email and password.",
+                true
+            );
+
+            return;
+        }
+
+
+        try {
+
+            if (authMode === "login") {
+
+                const {
+                    error
+                } =
+                    await supabaseClient.auth.signInWithPassword({
+                        email,
+                        password
+                    });
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                showAuthMessage(
+                    "Signed in successfully.",
+                    false
+                );
+
+
+                setTimeout(() => {
+
+                    closeModal("authModal");
+
+                }, 500);
+
+
+            } else {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.auth.signUp({
+
+                        email,
+                        password,
+
+                        options: {
+                            data: {
+                                username:
+                                    username ||
+                                    email.split("@")[0]
+                            }
+                        }
+
+                    });
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                if (data.session) {
+
+                    showAuthMessage(
+                        "Account created successfully.",
+                        false
+                    );
+
+                } else {
+
+                    showAuthMessage(
+                        "Account created. Check your email to confirm your account.",
+                        false
+                    );
+
+                }
+
+            }
+
+        } catch (error) {
+
+            showAuthMessage(
+                error.message ||
+                "Authentication failed.",
+                true
+            );
+
+        }
+
+    }
+
+
+    async function signOut() {
+
+        if (!supabaseClient) {
+            return;
+        }
+
+        await supabaseClient.auth.signOut();
+
+        document
+            .getElementById("accountMenu")
+            .classList.remove("show");
+
+    }
+
+
+    /*
+     ============================================================
+        PROFILE / AUTHORIZATION
+     ============================================================
+     */
+
+    function isAdmin() {
+
+        return (
+            currentProfile &&
+            currentProfile.role === "admin"
+        );
+
+    }
+
+
+    async function requireAuth() {
+
+        if (!currentUser) {
+
+            openAuthModal();
+
+            showAuthMessage(
+                "Please sign in to continue.",
+                true
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+    async function requireAdmin() {
+
+        if (!await requireAuth()) {
+            return false;
+        }
+
+        if (!isAdmin()) {
+
+            alert(
+                "You must be an administrator to perform this action."
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /*
+     ============================================================
+        MARKETPLACE
+     ============================================================
+     */
+
+    function showSection(section) {
+
+        const title =
+            document.getElementById(
+                "sectionTitle"
+            );
+
+        const description =
+            document.getElementById(
+                "sectionDescription"
+            );
+
+
+        document
+            .querySelectorAll("nav button")
+            .forEach(button =>
+                button.classList.remove("active")
+            );
+
+
+        if (section === "plugins") {
+
+            currentCategory = "Plugin";
+
+            document
+                .getElementById("navPlugins")
+                .classList.add("active");
+
+            title.textContent =
+                "Plugins";
+
+            description.textContent =
+                "Extend your game projects with powerful plugins and development tools.";
 
         } else {
 
-            card.style.display = "none";
+            currentCategory = "All";
+
+            document
+                .getElementById("navAssets")
+                .classList.add("active");
+
+            title.textContent =
+                "Game Assets";
+
+            description.textContent =
+                "Discover assets, plugins, tools and resources for your games.";
 
         }
 
-    });
-}
+
+        updateCategoryButtons();
+
+        renderMarketplace();
+
+    }
 
 
-document
-    .getElementById("modal")
-    .addEventListener("click", function(e) {
+    function setCategory(category) {
 
-        if (e.target === this) {
-            closeModal();
+        currentCategory = category;
+
+        document.getElementById(
+            "sectionTitle"
+        ).textContent =
+            category === "Plugin"
+                ? "Plugins"
+                : "Game Assets";
+
+
+        updateCategoryButtons();
+
+        renderMarketplace();
+
+    }
+
+
+    function setPriceFilter(filter) {
+
+        currentPriceFilter = filter;
+
+        renderMarketplace();
+
+    }
+
+
+    function updateCategoryButtons() {
+
+        document
+            .querySelectorAll(".filter")
+            .forEach(button =>
+                button.classList.remove("active")
+            );
+
+
+        if (currentCategory === "All") {
+
+            document
+                .getElementById("filterAll")
+                .classList.add("active");
+
         }
 
-    });
+
+        document
+            .querySelectorAll(".side-btn")
+            .forEach(button =>
+                button.classList.remove("active")
+            );
+
+    }
+
+
+    function renderMarketplace() {
+
+        const grid =
+            document.getElementById(
+                "assetGrid"
+            );
+
+        const empty =
+            document.getElementById(
+                "emptyMessage"
+            );
+
+
+        let items =
+            [...marketplaceAssets];
+
+
+        const search =
+            document.getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+        if (currentCategory !== "All") {
+
+            items =
+                items.filter(
+                    asset =>
+                        asset.category ===
+                        currentCategory
+                );
+
+        }
+
+
+        if (currentPriceFilter === "free") {
+
+            items =
+                items.filter(
+                    asset =>
+                        asset.price === 0
+                );
+
+        }
+
+
+        if (currentPriceFilter === "paid") {
+
+            items =
+                items.filter(
+                    asset =>
+                        asset.price > 0
+                );
+
+        }
+
+
+        if (search) {
+
+            items =
+                items.filter(asset =>
+
+                    asset.title
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    asset.description
+                        .toLowerCase()
+                        .includes(search)
+
+                );
+
+        }
+
+
+        const sort =
+            document.getElementById(
+                "sortSelect"
+            ).value;
+
+
+        if (sort === "priceLow") {
+
+            items.sort(
+                (a,b) =>
+                    a.price - b.price
+            );
+
+        }
+
+        if (sort === "priceHigh") {
+
+            items.sort(
+                (a,b) =>
+                    b.price - a.price
+            );
+
+        }
+
+        if (sort === "rating") {
+
+            items.sort(
+                (a,b) =>
+                    b.rating - a.rating
+            );
+
+        }
+
+        if (sort === "newest") {
+
+            items.sort(
+                (a,b) =>
+                    new Date(b.date) -
+                    new Date(a.date)
+            );
+
+        }
+
+
+        grid.innerHTML = "";
+
+
+        if (items.length === 0) {
+
+            empty.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        empty.style.display =
+            "none";
+
+
+        items.forEach(asset => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "card";
+
+
+            const price =
+                asset.price === 0
+                    ? "FREE"
+                    : "$" +
+                      asset.price.toFixed(2);
+
+
+            const pluginBadge =
+                asset.category === "Plugin"
+                    ? `<span class="badge plugin">Plugin</span>`
+                    : "";
+
+
+            const freeBadge =
+                asset.price === 0
+                    ? `<span class="badge free">Free</span>`
+                    : "";
+
+
+            card.innerHTML = `
+
+                <div class="card-image">
+                    ${asset.icon}
+                </div>
+
+                <div class="card-body">
+
+                    <div class="badges">
+
+                        ${pluginBadge}
+
+                        <span class="badge">
+                            ${asset.category}
+                        </span>
+
+                        ${freeBadge}
+
+                    </div>
+
+                    <h3>
+                        ${escapeHtml(asset.title)}
+                    </h3>
+
+                    <div class="description">
+                        ${escapeHtml(asset.description)}
+                    </div>
+
+                    <div class="card-bottom">
+
+                        <span class="price">
+                            ${price}
+                        </span>
+
+                        <span class="rating">
+                            ★ ${asset.rating}
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="view-btn"
+                        onclick="openAsset(${asset.id})"
+                    >
+                        View Details
+                    </button>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        });
+
+    }
+
+
+    /*
+     ============================================================
+        ASSET MODAL
+     ============================================================
+     */
+
+    function openAsset(id) {
+
+        const asset =
+            marketplaceAssets.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if (!asset) {
+            return;
+        }
+
+
+        currentAsset =
+            asset;
+
+
+        document.getElementById(
+            "detailTitle"
+        ).textContent =
+            asset.title;
+
+
+        document.getElementById(
+            "detailIcon"
+        ).textContent =
+            asset.icon;
+
+
+        document.getElementById(
+            "detailDescription"
+        ).textContent =
+            asset.description;
+
+
+        document.getElementById(
+            "detailPrice"
+        ).textContent =
+            asset.price === 0
+                ? "FREE"
+                : "$" +
+                  asset.price.toFixed(2);
+
+
+        document.getElementById(
+            "detailRating"
+        ).textContent =
+            "★ " +
+            asset.rating;
+
+
+        document.getElementById(
+            "detailBadges"
+        ).innerHTML = `
+
+            <span class="badge">
+                ${escapeHtml(asset.category)}
+            </span>
+
+            ${
+                asset.price === 0
+                    ? '<span class="badge free">Free</span>'
+                    : ''
+            }
+
+        `;
+
+
+        document
+            .getElementById("assetModal")
+            .classList.add("show");
+
+    }
+
+
+    async function downloadAsset() {
+
+        if (!await requireAuth()) {
+            return;
+        }
+
+
+        /*
+            This is intentionally a placeholder.
+
+            Later this function should:
+
+            1. Check that the user is authenticated.
+            2. Check whether the asset is free or purchased.
+            3. Request an authorized download.
+            4. Generate a Supabase Storage signed URL.
+            5. Start the download.
+
+            NEVER expose a service_role key in this page.
+        */
+
+
+        alert(
+            "The download system is not connected yet. Supabase Storage can be added next."
+        );
+
+    }
+
+
+    /*
+     ============================================================
+        ADMIN PANEL
+     ============================================================
+     */
+
+    async function openAdminPanel() {
+
+        document
+            .getElementById("accountMenu")
+            .classList.remove("show");
+
+
+        if (!await requireAdmin()) {
+            return;
+        }
+
+
+        document
+            .getElementById("adminModal")
+            .classList.add("show");
+
+
+        await loadAdminStats();
+
+    }
+
+
+    async function loadAdminStats() {
+
+        if (!supabaseClient) {
+            return;
+        }
+
+
+        try {
+
+            const usersResult =
+                await supabaseClient
+                    .from("profiles")
+                    .select("*", {
+                        count: "exact",
+                        head: true
+                    });
+
+
+            const assetsResult =
+                await supabaseClient
+                    .from("assets")
+                    .select("*", {
+                        count: "exact",
+                        head: true
+                    });
+
+
+            if (!usersResult.error) {
+
+                document.getElementById(
+                    "userCount"
+                ).textContent =
+                    usersResult.count ?? 0;
+
+            }
+
+
+            if (!assetsResult.error) {
+
+                document.getElementById(
+                    "assetCount"
+                ).textContent =
+                    assetsResult.count ?? 0;
+
+            }
+
+
+            const pluginCount =
+                marketplaceAssets.filter(
+                    asset =>
+                        asset.category === "Plugin"
+                ).length;
+
+
+            document.getElementById(
+                "pluginCount"
+            ).textContent =
+                pluginCount;
+
+
+        } catch (error) {
+
+            console.error(
+                "Admin statistics error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    async function adminUploadPlaceholder() {
+
+        if (!await requireAdmin()) {
+            return;
+        }
+
+
+        alert(
+            "Asset upload is the next part to connect. It should use Supabase Storage with admin-only Storage policies."
+        );
+
+    }
+
+
+    /*
+     ============================================================
+        UI HELPERS
+     ============================================================
+     */
+
+    function toggleAccountMenu() {
+
+        document
+            .getElementById("accountMenu")
+            .classList.toggle("show");
+
+    }
+
+
+    function closeModal(id) {
+
+        document
+            .getElementById(id)
+            .classList.remove("show");
+
+    }
+
+
+    function showAuthMessage(message, error) {
+
+        const element =
+            document.getElementById(
+                "authMessage"
+            );
+
+
+        element.textContent =
+            message;
+
+
+        element.className =
+            error
+                ? "message error"
+                : "message success";
+
+    }
+
+
+    function clearAuthMessage() {
+
+        const element =
+            document.getElementById(
+                "authMessage"
+            );
+
+
+        element.textContent = "";
+
+        element.className =
+            "message";
+
+    }
+
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+
+    }
+
+
+    /*
+     ============================================================
+        CLOSE MODALS WHEN CLICKING BACKDROP
+     ============================================================
+     */
+
+    document
+        .querySelectorAll(".modal-backdrop")
+        .forEach(backdrop => {
+
+            backdrop.addEventListener(
+                "click",
+                event => {
+
+                    if (
+                        event.target ===
+                        backdrop
+                    ) {
+
+                        backdrop.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /*
+     ============================================================
+        CLOSE ACCOUNT MENU WHEN CLICKING ELSEWHERE
+     ============================================================
+     */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            const area =
+                document.getElementById(
+                    "accountArea"
+                );
+
+            if (
+                area &&
+                !area.contains(event.target)
+            ) {
+
+                document
+                    .getElementById(
+                        "accountMenu"
+                    )
+                    .classList.remove(
+                        "show"
+                    );
+
+            }
+
+        }
+    );
 
 </script>
 
